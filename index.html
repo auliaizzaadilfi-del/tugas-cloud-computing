@@ -3,77 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Cloud Computing</title>
+    <title>Penghitung Tamu Pernikahan Digital</title>
     <style>
-        /* Pengaturan Dasar */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f8fafc; color: #334155; line-height: 1.6; }
-
-        /* Navigasi (Menu Atas) */
-        nav { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        nav .logo { font-weight: bold; font-size: 1.2rem; color: #2563eb; }
-        .badge { background: #e0f2fe; color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; font-weight: bold; }
-
-        /* Bagian Utama (Hero Section) */
-        header { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 5rem 5%; text-align: center; }
-        header h1 { font-size: 2.8rem; margin-bottom: 1rem; }
-        header p { font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; opacity: 0.9; }
-        .btn { background: white; color: #1e3a8a; padding: 0.8rem 1.8rem; border-radius: 8px; font-weight: bold; font-size: 1rem; transition: 0.3s; cursor: pointer; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 12px rgba(0,0,0,0.15); background: #f1f5f9; }
-
-        /* Bagian Konten (Kartu Penjelasan) */
-        .container { padding: 4rem 5%; max-width: 1100px; margin: auto; }
-        .section-title { text-align: center; margin-bottom: 2.5rem; color: #1e293b; font-size: 1.8rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.3s; border-top: 4px solid #3b82f6; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 12px 20px rgba(0,0,0,0.1); }
-        .card h3 { color: #0f172a; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
-        .card p { font-size: 0.95rem; color: #475569; }
-
-        /* Bagian Bawah (Footer) */
-        footer { text-align: center; padding: 2rem; background: #0f172a; color: #94a3b8; font-size: 0.9rem; }
+        /* Desain Tema Pernikahan Elegan */
+        body { 
+            font-family: 'Georgia', serif; 
+            background-color: #fdfbf7; 
+            color: #4a4a4a; 
+            text-align: center; 
+            margin: 0; 
+            padding: 0; 
+        }
+        header { 
+            background: linear-gradient(135deg, #d4af37, #b58d1e); 
+            color: white; 
+            padding: 2rem; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+        }
+        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
+        p.subtitle { font-style: italic; font-size: 1.1rem; margin-top: 5px; opacity: 0.9; }
+        
+        .container { 
+            max-width: 500px; 
+            margin: 40px auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
+            border: 1px solid #f0eae1; 
+        }
+        h2 { color: #555; font-size: 1.2rem; margin-bottom: 0; }
+        
+        /* Tampilan Angka */
+        .counter-display { 
+            font-size: 6rem; 
+            font-weight: bold; 
+            color: #d4af37; 
+            margin: 10px 0 30px 0; 
+        }
+        
+        /* Desain Tombol */
+        .btn-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        button { 
+            font-size: 1.2rem; 
+            padding: 15px 25px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-weight: bold; 
+            color: white;
+        }
+        .btn-add { background-color: #4CAF50; box-shadow: 0 4px #388E3C; width: 60%; }
+        .btn-add:active { transform: translateY(4px); box-shadow: 0 0 #388E3C; }
+        .btn-min { background-color: #f44336; box-shadow: 0 4px #d32f2f; width: 30%; }
+        .btn-min:active { transform: translateY(4px); box-shadow: 0 0 #d32f2f; }
+        
+        .btn-reset { 
+            background-color: #9e9e9e; 
+            font-size: 0.9rem; 
+            padding: 10px 20px; 
+            margin-top: 10px;
+            box-shadow: 0 3px #757575;
+        }
+        .btn-reset:active { transform: translateY(3px); box-shadow: 0 0 #757575; }
+        
+        footer { margin-top: 50px; padding: 20px; font-size: 0.9rem; color: #888; }
+        
+        /* Info Cloud Box */
+        .cloud-info {
+            background-color: #f8f9fa;
+            border-left: 4px solid #d4af37;
+            padding: 15px;
+            text-align: left;
+            font-size: 0.85rem;
+            margin-top: 30px;
+            color: #555;
+            font-family: sans-serif;
+        }
     </style>
 </head>
 <body>
-
-    <nav>
-        <div class="logo">CloudPortofolio.</div>
-        <div class="badge">Tugas Kuliah / Sekolah</div>
-    </nav>
-
     <header>
-        <h1>Halo, Saya [NAMA ANDA]! 👋</h1>
-        <p>Selamat datang di website saya. Halaman ini adalah bukti nyata implementasi teknologi Cloud Computing menggunakan model <b>Platform as a Service (PaaS)</b>.</p>
-        <button class="btn" onclick="sapaPengunjung()">Klik Untuk Menyapa!</button>
+        <h1>Buku Tamu Digital</h1>
+        <p class="subtitle">Receptionist Dashboard</p>
     </header>
 
     <div class="container">
-        <h2 class="section-title">Bagaimana Website Ini Bekerja? ☁️</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>📁 Cloud Repository (GitHub)</h3>
-                <p>Semua kode sumber (HTML, CSS, JS) dari website ini disimpan secara aman di cloud menggunakan GitHub. Ini berfungsi sebagai pusat penyimpanan dan manajemen versi kode.</p>
-            </div>
-            <div class="card">
-                <h3>🚀 Cloud Deployment (Vercel)</h3>
-                <p>Saya menggunakan Vercel (PaaS) yang terhubung langsung dengan GitHub. Saat ada perubahan kode, Vercel secara otomatis membangun dan meluncurkan website ini ke internet (CI/CD).</p>
-            </div>
-            <div class="card">
-                <h3>⚡ Jaringan Global (CDN)</h3>
-                <p>Website ini tidak berada di satu server fisik saja. File website didistribusikan ke berbagai server di seluruh dunia menggunakan Content Delivery Network agar bisa diakses dengan sangat cepat.</p>
-            </div>
+        <h2>Jumlah Tamu Hadir:</h2>
+        <div class="counter-display" id="guestCount">0</div>
+
+        <div class="btn-group">
+            <button class="btn-min" onclick="kurangiTamu()">- 1</button>
+            <button class="btn-add" onclick="tambahTamu()">+ 1 Tamu Masuk</button>
+        </div>
+
+        <button class="btn-reset" onclick="resetTamu()">Reset Data</button>
+        
+        <div class="cloud-info">
+            <b>☁️ Arsitektur Cloud:</b><br>
+            Aplikasi ini di-<i>hosting</i> menggunakan layanan <b>Vercel (PaaS)</b>. Terhubung langsung melalui repositori <b>GitHub</b> dengan sistem <i>Continuous Deployment</i>.
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2026 - Dibuat oleh [NAMA ANDA] menggunakan GitHub & Vercel.</p>
+        &copy; 2026 - Dibuat oleh <b>[NAMA ANDA]</b> untuk Proyek Cloud Computing
     </footer>
 
     <script>
-        function sapaPengunjung() {
-            alert("Halo! Terima kasih sudah mengunjungi tugas website Cloud Computing saya. Silakan scroll ke bawah untuk melihat penjelasan teknologinya!");
+        // 1. Mengambil data dari memori browser (Local Storage)
+        // Jika belum ada data, jadikan 0
+        let totalTamu = localStorage.getItem('jumlahTamuPernikahan') ? parseInt(localStorage.getItem('jumlahTamuPernikahan')) : 0;
+        const displayElement = document.getElementById('guestCount');
+
+        // 2. Fungsi untuk mengupdate angka di layar dan menyimpan ke memori
+        function updateDisplay() {
+            displayElement.innerText = totalTamu;
+            localStorage.setItem('jumlahTamuPernikahan', totalTamu);
+        }
+
+        // Tampilkan angka saat web pertama kali dibuka
+        updateDisplay();
+
+        // 3. Fungsi Tombol Tambah
+        function tambahTamu() {
+            totalTamu++;
+            updateDisplay();
+        }
+
+        // 4. Fungsi Tombol Kurang (Tidak boleh minus)
+        function kurangiTamu() {
+            if (totalTamu > 0) {
+                totalTamu--;
+                updateDisplay();
+            }
+        }
+
+        // 5. Fungsi Tombol Reset
+        function resetTamu() {
+            if(confirm("Apakah Anda yakin ingin mereset jumlah tamu kembali menjadi 0?")) {
+                totalTamu = 0;
+                updateDisplay();
+            }
         }
     </script>
-
 </body>
 </html>
