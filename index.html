@@ -3,135 +3,302 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penghitung Tamu Pernikahan Digital</title>
+    <title>Sistem Buku Tamu Digital - Kelompok 4</title>
     <style>
-        /* Desain Tema Pernikahan Elegan */
+        /* Tema Warna: Deep Navy & Premium Gold */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-gold: #d4af37;
+            --text-light: #f8fafc;
+            --text-dim: #94a3b8;
+            --btn-success: #22c55e;
+            --btn-danger: #ef4444;
+            --quota-color: #38bdf8; /* Biru muda untuk indikator kuota */
+        }
+
         body { 
             font-family: 'Georgia', serif; 
-            background-color: #fdfbf7; 
-            color: #4a4a4a; 
+            background-color: var(--bg-color); 
+            color: var(--text-light); 
             text-align: center; 
             margin: 0; 
             padding: 0; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
         header { 
-            background: linear-gradient(135deg, #d4af37, #b58d1e); 
-            color: white; 
-            padding: 2rem; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border-bottom: 2px solid var(--accent-gold);
+            color: var(--text-light); 
+            padding: 1.5rem; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
         }
-        h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
-        p.subtitle { font-style: italic; font-size: 1.1rem; margin-top: 5px; opacity: 0.9; }
+        h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; color: var(--accent-gold); }
+        p.subtitle { font-family: sans-serif; font-size: 0.9rem; margin-top: 5px; color: var(--text-dim); letter-spacing: 2px; text-transform: uppercase; }
         
         .container { 
-            max-width: 500px; 
-            margin: 40px auto; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05); 
-            border: 1px solid #f0eae1; 
+            max-width: 450px; 
+            margin: auto; 
+            background: var(--card-bg); 
+            padding: 40px 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4); 
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            width: 90%;
+            box-sizing: border-box;
         }
-        h2 { color: #555; font-size: 1.2rem; margin-bottom: 0; }
+
+        /* Utility Class untuk Sembunyikan Halaman */
+        .hidden { display: none !important; }
         
-        /* Tampilan Angka */
+        /* Gaya Form Login */
+        .form-group { text-align: left; margin-bottom: 20px; font-family: sans-serif; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-dim); font-size: 0.9rem; }
+        .form-group input { 
+            width: 100%; 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px solid #334155; 
+            background: #0f172a; 
+            color: white; 
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .form-group input:focus { border-color: var(--accent-gold); outline: none; }
+        .error-msg { color: var(--btn-danger); font-family: sans-serif; font-size: 0.85rem; margin-bottom: 15px; text-align: left; }
+
+        /* Tampilan Dashboard Counter & Quota */
+        h2 { color: var(--text-light); font-size: 1.2rem; margin-bottom: 0; font-family: sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        .welcome-user { font-family: sans-serif; font-size: 0.9rem; color: var(--accent-gold); margin-bottom: 20px; }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: rgba(15, 23, 42, 0.5);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
         .counter-display { 
-            font-size: 6rem; 
+            font-size: 3.5rem; 
             font-weight: bold; 
-            color: #d4af37; 
-            margin: 10px 0 30px 0; 
+            color: var(--accent-gold); 
+            margin-top: 5px;
         }
         
-        /* Desain Tombol */
-        .btn-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .quota-display {
+            font-size: 3.5rem; 
+            font-weight: bold; 
+            color: var(--quota-color); 
+            margin-top: 5px;
+        }
+
+        .alert-full {
+            background-color: rgba(239, 68, 68, 0.2);
+            border: 1px solid var(--btn-danger);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 8px;
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Desain Tombol-Tombol */
         button { 
-            font-size: 1.2rem; 
-            padding: 15px 25px; 
+            font-size: 1rem; 
+            padding: 12px 20px; 
             border: none; 
-            border-radius: 10px; 
+            border-radius: 8px; 
             cursor: pointer; 
-            transition: all 0.3s ease; 
+            transition: all 0.2s ease; 
             font-weight: bold; 
             color: white;
+            width: 100%;
         }
-        .btn-add { background-color: #4CAF50; box-shadow: 0 4px #388E3C; width: 60%; }
-        .btn-add:active { transform: translateY(4px); box-shadow: 0 0 #388E3C; }
-        .btn-min { background-color: #f44336; box-shadow: 0 4px #d32f2f; width: 30%; }
-        .btn-min:active { transform: translateY(4px); box-shadow: 0 0 #d32f2f; }
+        .btn-login { background-color: var(--accent-gold); color: var(--bg-color); font-size: 1.1rem; }
+        .btn-login:hover { background-color: #b58d1e; }
         
-        .btn-reset { 
-            background-color: #9e9e9e; 
-            font-size: 0.9rem; 
-            padding: 10px 20px; 
-            margin-top: 10px;
-            box-shadow: 0 3px #757575;
-        }
-        .btn-reset:active { transform: translateY(3px); box-shadow: 0 0 #757575; }
+        .btn-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
+        .btn-add { background-color: var(--btn-success); width: 65%; }
+        .btn-add:active { transform: scale(0.98); }
+        .btn-add:disabled { background-color: #475569; cursor: not-allowed; opacity: 0.5; }
+        .btn-min { background-color: var(--btn-danger); width: 35%; }
+        .btn-min:active { transform: scale(0.98); }
         
-        footer { margin-top: 50px; padding: 20px; font-size: 0.9rem; color: #888; }
+        .btn-action-group { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-reset { background-color: #475569; font-size: 0.85rem; padding: 8px; }
+        .btn-logout { background-color: transparent; border: 1px solid #475569; color: var(--text-dim); font-size: 0.85rem; padding: 8px; }
+        .btn-logout:hover { color: white; border-color: white; }
         
         /* Info Cloud Box */
         .cloud-info {
-            background-color: #f8f9fa;
-            border-left: 4px solid #d4af37;
+            background-color: rgba(15, 23, 42, 0.6);
+            border-left: 4px solid var(--accent-gold);
             padding: 15px;
             text-align: left;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             margin-top: 30px;
-            color: #555;
+            color: var(--text-dim);
             font-family: sans-serif;
+            line-height: 1.4;
         }
+        
+        footer { margin-top: auto; padding: 20px; font-size: 0.85rem; color: var(--text-dim); font-family: sans-serif; }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>Buku Tamu Digital</h1>
-        <p class="subtitle">Receptionist Dashboard</p>
+        <h1>Buku Tamu Pernikahan</h1>
+        <p class="subtitle">Cloud Security & Dashboard</p>
     </header>
 
-    <div class="container">
-        <h2>Jumlah Tamu Hadir:</h2>
-        <div class="counter-display" id="guestCount">0</div>
+    <div id="loginPage" class="container">
+        <h2 style="margin-bottom: 25px; font-family: 'Georgia', serif;">Sign In Receptionist</h2>
+        <div id="errorContainer" class="error-msg hidden">Username atau password salah!</div>
+        
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Masukkan username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Masukkan password">
+        </div>
+        
+        <button class="btn-login" onclick="handleLogin()">Masuk ke Sistem</button>
+    </div>
+
+    <div id="dashboardPage" class="container hidden">
+        <div class="welcome-user">👋 Selamat Datang, <span id="userSession">Admin</span></div>
+        
+        <div id="quotaAlert" class="alert-full hidden">⚠️ Peringatan: Kuota undangan penuh! Tidak bisa menambah tamu baru.</div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h2>Hadir</h2>
+                <div class="counter-display" id="guestCount">0</div>
+            </div>
+            <div class="stat-card">
+                <h2>Sisa Kuota</h2>
+                <div class="quota-display" id="quotaCount">500</div>
+            </div>
+        </div>
 
         <div class="btn-group">
             <button class="btn-min" onclick="kurangiTamu()">- 1</button>
-            <button class="btn-add" onclick="tambahTamu()">+ 1 Tamu Masuk</button>
+            <button class="btn-add" id="btnAddGuest" onclick="tambahTamu()">+ 1 Tamu Masuk</button>
         </div>
 
-        <button class="btn-reset" onclick="resetTamu()">Reset Data</button>
+        <div class="btn-action-group">
+            <button class="btn-reset" onclick="resetTamu()">Reset Data</button>
+            <button class="btn-logout" onclick="handleLogout()">Logout</button>
+        </div>
         
         <div class="cloud-info">
-            <b>☁️ Arsitektur Cloud:</b><br>
-            Aplikasi ini di-<i>hosting</i> menggunakan layanan <b>Vercel (PaaS)</b>. Terhubung langsung melalui repositori <b>GitHub</b> dengan sistem <i>Continuous Deployment</i>.
+            <b>🔒 Keamanan & Komputasi Kontekstual:</b><br>
+            Sistem memproses batasan komputasi sisa kuota secara dinamis di sisi klien. Sinkronisasi arsitektur pengiriman web di-<i>hosting</i> oleh <b>Vercel PaaS</b>.
         </div>
     </div>
 
     <footer>
-        &copy; 2026 - Dibuat oleh <b>KELOMPOK4</b> untuk Proyek Cloud Computing
+        &copy; 2026 - Dibuat oleh <b>KELOMPOK 4</b> untuk Proyek Cloud Computing
     </footer>
 
     <script>
-        // 1. Mengambil data dari memori browser (Local Storage)
-        // Jika belum ada data, jadikan 0
+        // --- LOGIKA STATE & STRUKTUR DATA ---
+        const KUOTA_MAKSIMAL = 500; // Anda bisa ubah angka batas maksimal kuota di sini
+        
         let totalTamu = localStorage.getItem('jumlahTamuPernikahan') ? parseInt(localStorage.getItem('jumlahTamuPernikahan')) : 0;
+        let loginStatus = sessionStorage.getItem('isLoggedIn') === 'true';
+
+        // Element Selector
+        const loginPage = document.getElementById('loginPage');
+        const dashboardPage = document.getElementById('dashboardPage');
         const displayElement = document.getElementById('guestCount');
+        const quotaElement = document.getElementById('quotaCount');
+        const btnAddGuest = document.getElementById('btnAddGuest');
+        const quotaAlert = document.getElementById('quotaAlert');
+        const errorContainer = document.getElementById('errorContainer');
 
-        // 2. Fungsi untuk mengupdate angka di layar dan menyimpan ke memori
+        // Cek status login saat halaman pertama kali dibuka
+        function proteksiHalaman() {
+            if (loginStatus) {
+                loginPage.classList.add('hidden');
+                dashboardPage.classList.remove('hidden');
+                updateDisplay();
+            } else {
+                loginPage.classList.remove('hidden');
+                dashboardPage.classList.add('hidden');
+            }
+        }
+        proteksiHalaman();
+
+        // --- FUNGSI OTENTIKASI (LOGIN/LOGOUT) ---
+        function handleLogin() {
+            const userIn = document.getElementById('username').value;
+            const passIn = document.getElementById('password').value;
+
+            // Kredensial Statis untuk keperluan Demo Tugas
+            if (userIn === 'admin' && passIn === 'kelompok4') {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                loginStatus = true;
+                errorContainer.classList.add('hidden');
+                
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+                
+                proteksiHalaman();
+            } else {
+                errorContainer.classList.remove('hidden');
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem('isLoggedIn');
+            loginStatus = false;
+            proteksiHalaman();
+        }
+
+        // --- FUNGSI UTAMA APLIKASI COUNTER & KUOTA ---
         function updateDisplay() {
+            // Hitung sisa kuota secara matematis
+            let sisaKuota = KUOTA_MAKSIMAL - totalTamu;
+            
+            // Tampilkan ke UI
             displayElement.innerText = totalTamu;
+            quotaElement.innerText = sisaKuota;
+            
+            // Simpan data tamu terbaru ke LocalStorage browser
             localStorage.setItem('jumlahTamuPernikahan', totalTamu);
+            
+            // Logika Validasi Batas Kuota
+            if (sisaKuota <= 0) {
+                btnAddGuest.disabled = true;
+                quotaAlert.classList.remove('hidden');
+            } else {
+                btnAddGuest.disabled = false;
+                quotaAlert.classList.add('hidden');
+            }
         }
 
-        // Tampilkan angka saat web pertama kali dibuka
-        updateDisplay();
-
-        // 3. Fungsi Tombol Tambah
         function tambahTamu() {
-            totalTamu++;
-            updateDisplay();
+            if (totalTamu < KUOTA_MAKSIMAL) {
+                totalTamu++;
+                updateDisplay();
+            }
         }
 
-        // 4. Fungsi Tombol Kurang (Tidak boleh minus)
         function kurangiTamu() {
             if (totalTamu > 0) {
                 totalTamu--;
@@ -139,9 +306,8 @@
             }
         }
 
-        // 5. Fungsi Tombol Reset
         function resetTamu() {
-            if(confirm("Apakah Anda yakin ingin mereset jumlah tamu kembali menjadi 0?")) {
+            if(confirm("Apakah Anda yakin ingin mereset data? Jumlah tamu akan kembali ke 0 dan kuota kembali utuh.")) {
                 totalTamu = 0;
                 updateDisplay();
             }
